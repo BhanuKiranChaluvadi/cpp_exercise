@@ -31,8 +31,7 @@ string  getVmSize(string pid){
     while(getline(ifs, line)) {
         if(line.compare(0, key.size(), key) == 0) {
             std::istringstream iss(line);
-            // std::vector<string> words(std::istream_iterator<string>{iss}, std::istream_iterator<string>());
-            std::vector<string> words ;
+            std::vector<string> words(std::istream_iterator<string>{iss}, std::istream_iterator<string>());
             std::for_each(words.begin(), words.end(), [](string &word){cout << word << endl;});
             value = stof(words[1])/float(1024);
             break;
