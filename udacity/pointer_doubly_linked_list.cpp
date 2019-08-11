@@ -1,5 +1,5 @@
-// RUN: g++ -std=c++17 -Wall -Wextra -Wpedantic -Wunused doubly_linked_list.cpp 
-// cppcheck --enable=all ./doubly_linked_list.cpp 
+// RUN: g++ -std=c++17 -Wall -Wextra -Wpedantic -Wunused pointer_doubly_linked_list.cpp 
+// cppcheck --enable=all ./pointer_doubly_linked_list.cpp 
 
 /*
 ------------------------------------------------

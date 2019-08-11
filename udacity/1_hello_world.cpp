@@ -1,4 +1,4 @@
-// RUN: g++ -std=c++17 -Wall -Wextra -Wpedantic -Wunused 1_hello_world.cpp 
+// RUN: g++ -std=c++17 -Wall -Wextra -Wpedantic -Wunused 1_hello_world.cpp  && ./a.out
 // cppcheck --enable=all ./1_hello_world.cpp 
 
 // gcc/clang compiler Warnings: -Wall -Wextra -Wpedantic -Wunused 
