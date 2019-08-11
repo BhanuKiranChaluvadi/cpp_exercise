@@ -23,8 +23,8 @@ template<class T> class List {
 public:
     List() :  head_(nullptr), tail_(nullptr) {}
     ~List() ;
-    void pushFront(T);
-    void Pushback(T);
+    void PushFront(T);
+    void PushBack(T);
     T PopBack();
     T PopFront();
 
@@ -50,11 +50,11 @@ template<class T> List<T>::~List() {
     while(this->head_) {
         Node *temp(this->head_);      // use copy constructor -- can use std::move in future
         this->head_ = this->head_->next;    // update head
-        delete this->head_;           // delete the Node that is no longer in List.
+        delete temp;           // delete the Node that is no longer in List.
     }
 }
 
-template<class T> void List<T>::pushFront(T val) {
+template<class T> void List<T>::PushFront(T val) {
     this->head_ = new Node(val, nullptr, this->head_);
     // Handle first element insertion or not
     if(this->tail_ == nullptr){
@@ -64,7 +64,7 @@ template<class T> void List<T>::pushFront(T val) {
     }
 }
 
-template<class T> void List<T>::Pushback(T val) {
+template<class T> void List<T>::PushBack(T val) {
     this->tail_ = new Node(val, this->tail_, nullptr);
     
     if (this->head_ == nullptr) {       // First element insertion
@@ -75,12 +75,12 @@ template<class T> void List<T>::Pushback(T val) {
 }
 
 template<class T> T List<T>::PopFront() {
-    if(List::Empty){
+    if(List::Empty()){
         throw("Cannot List::PopBack() when List::Empty()");
     }
     Node *temp(this->head_);
-    T value = (this->head_->val);
-    this->head = this->head_->next;
+    T value = (this->head_->value);
+    this->head_ = this->head_->next;
     if(this->head_ == nullptr) {
         this->tail_ = nullptr;
     } else {
@@ -91,11 +91,11 @@ template<class T> T List<T>::PopFront() {
 }
 
 template <class T> T List<T>::PopBack() {
-    if(List::Empty){
+    if(List::Empty()){
         throw("Cannot List::PopBack() when List::Empty()");
     }
     Node *temp(this->tail_);
-    T value = (this->tail_->val);
+    T value = (this->tail_->value);
     this->tail_ = this->tail_->previous;
     if(this->tail_ == nullptr) {
         this->head_ = nullptr;
@@ -117,6 +117,19 @@ template<class T> int List<T>::Size() const {
 }
 
 int main() {
+    // Sanity test
+    List<int> list1;
+    list1.PushBack(9);
+    assert(list1.Size() == 1);
+
+    // Deeper test
+    List<int> list2;
+    list2.PushFront(9);
+    list2.PushBack(10);
+    assert(list2.Size() == 2);
+    assert(list2.PopBack() == 10);
+    assert(list2.PopFront() == 9);
+    assert(list2.Size() == 0);
 
     return 0;
 }
