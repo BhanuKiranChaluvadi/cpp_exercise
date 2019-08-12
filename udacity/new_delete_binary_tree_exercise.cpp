@@ -33,12 +33,14 @@ class Binary_tree {
 public:
     Binary_tree() {}
     ~Binary_tree() {
-         delete root;
+         delete Binary_tree::root;
     }
-
-
-private:
-
+    void addData(int new_data) {
+        Binary_tree::add(new_data, Binary_tree::root);
+    }
+    bool searchItem(int item) {
+        return Binary_tree::search(item, Binary_tree::root);
+    }
 
 
 };
