@@ -19,7 +19,8 @@ List
 using namespace std;
 
 
-template<class T> class List {
+template<class T> 
+class List {
 public:
     List() :  head_(nullptr), tail_(nullptr) {}
     ~List() ;

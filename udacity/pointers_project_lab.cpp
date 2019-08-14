@@ -5,7 +5,8 @@
 
 using namespace std;
 
-template <class T> class PtrDetails {
+template <class T>
+class PtrDetails {
 public:
     PtrDetails(T ptr, int size) : memPtr(ptr) {
         if (size > 0) {
@@ -26,6 +27,7 @@ bool operator == (const PtrDetails<T> &obj1,
                 const PtrDetails<T> &obj2) {
 
 }
+
 
 
 int main() {
