@@ -1,6 +1,6 @@
 
 // RUN: g++ -std=c++17 -Wall -Wextra -Wpedantic -Wunused smart_pointer_ex1.cpp && ./a.out
-// cppcheck --enable=all ./smart_pointer.cpp 
+// cppcheck --enable=all ./smart_pointer_ex1.cpp 
 
 
 #include <iostream>
@@ -31,7 +31,8 @@ int main() {
     cout << ptr_1.get() << endl;
 
     // transfer ownership to ptr_2
-    unique_ptr<MyClass> ptr_2 = move(ptr_1);
+    unique_ptr<MyClass> ptr_2(move(ptr_1));
+    // unique_ptr<MyClass> ptr_2 = move(ptr_1);
     ptr_2->classMethod();
     cout << ptr_1.get() << endl;
     cout << ptr_2.get() << endl;
