@@ -1,4 +1,4 @@
-// RUN: gcc -g -std=c++17 -Wall -Wextra -Wpedantic -Wunused smart_pointer.cpp && ./a.out
+// RUN: g++ -g -std=c++17 -Wall -Wextra -Wpedantic -Wunused smart_pointer.cpp && ./a.out
 // cppcheck --enable=all ./smart_pointer.cpp 
 
 #include <iostream>
