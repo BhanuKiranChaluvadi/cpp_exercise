@@ -32,7 +32,7 @@ int main()
     fs::create_directories("sandbox/c/d");
     system("ls -la sandbox/*");
     ///
-    cout << "Is path exsits? " << fs::exists("sandbox/a/b/index.html")
+    cout << "Is path exsits? " << fs::exists("sandbox/a/b/index.html");
     ///
     cout << "Were directories removed? " << fs::remove_all("sandbox/a/b/index.html") << endl;
     cout << "Were directories removed? " << fs::remove_all("sandbox") << endl;
