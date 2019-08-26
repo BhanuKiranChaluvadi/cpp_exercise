@@ -22,8 +22,14 @@ int main() {
     std::this_thread::sleep_for(std::chrono::milliseconds(50));     // simulate work
     std::cout << "Finished work in main\n";
 
+
+    // detach thread and continue with main
+    // t.detach();
+    
     // wait for the thread to finish
     t.join();
+
+
 
     return 0;
 }
