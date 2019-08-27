@@ -1,5 +1,18 @@
 // RUN: g++ -std=c++17 -Wall -Wextra -Wpedantic -Wunused threads.cpp -pthread && ./a.out
 
+/*
+Initialiing a thread
+    1. Passing a function object directly (like below). But arguments can't be passed / only global varibles are used.
+
+    # passing arguments to threads -->  function pointer
+                                        operator overloading 
+                                        lambda function
+    2. Using operator () overloading
+    3. Using lambda functions
+    4. Using thread constructor - varidic functions -- call independent functions / class member functions.
+    5. Using member functons 
+*/
+
 #include <iostream>
 #include <thread>
 #include <vector>

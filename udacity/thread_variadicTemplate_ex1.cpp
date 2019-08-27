@@ -4,6 +4,7 @@
 #include <thread>
 #include <string>
 
+
 void printID(int id) {
     std::this_thread::sleep_for(std::chrono::microseconds(50));
     std::cout << "ID = " << id << std::endl;
@@ -19,15 +20,23 @@ int main() {
 
     int id = 0; // Define an integer variable
 
-    // ++id;
+    
     // starting thread using variadic function
-    std::thread t1(printID, id);
-    std::thread t2(printIDAndName, ++id, "MyString");
+    std::thread t1(printID, id); 
+
+    std::thread t2(printID, std::ref(id));  // Not ideal. By default thread copies its arguments
+                                            // As reference to local data tends to be unlikely 
+                                            // to last the entire thread's life time.                     
+    std::thread t3(printIDAndName, ++id, "MyString");
     // std::thread t3(printIDAndName, ++id);   // this produce a compiler error
 
+
+    ++id;
+
     // wait for thread before returning
-    t1.join();
+    // t1.join();
     t2.join();
+    t3.join();
     // t3.join();
 
     return 0;
