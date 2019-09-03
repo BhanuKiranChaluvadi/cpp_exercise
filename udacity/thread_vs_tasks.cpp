@@ -25,13 +25,12 @@ int main() {
 
     // retrieve result within try-cathc-block
     // ftr.wait();
-    /*
     try {
         double result = ftr.get();
         std::cout << "Result = " << result << std::endl;
     } catch (std::runtime_error e) {
         std::cout << e.what() << std::endl;
-    } */
+    } 
 
     return 0;
 }

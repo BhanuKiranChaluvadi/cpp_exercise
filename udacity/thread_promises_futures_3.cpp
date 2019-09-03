@@ -5,7 +5,7 @@
 #include <future>
 #include <cmath>
 
-/*
+/**/
 void divideByNumber (std::promise<double> &&prms, double num, double denom) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000)); // simulate work
     try {
@@ -17,10 +17,10 @@ void divideByNumber (std::promise<double> &&prms, double num, double denom) {
         prms.set_exception(std::current_exception());
     }
 
-}*/
+}
 
 // Throws an error. 
-/* */
+/* 
 void divideByNumber(std::promise<double> &&prms, double num, double denom) {
 
     std::this_thread::sleep_for(std::chrono::milliseconds(500)); // simulate work
@@ -30,6 +30,7 @@ void divideByNumber(std::promise<double> &&prms, double num, double denom) {
     } else 
         prms.set_value(num / denom);
 }
+*/
 
 
 int main() {
@@ -43,12 +44,12 @@ int main() {
     std::thread t(divideByNumber, std::move(prms), num, denom);
 
     // retrive result within try-catch-block
-    // try {
-    //     double result = ftr.get();
-    //     std::cout << "Result = " << result << std::endl;
-    // } catch (std::runtime_error e) {
-    //     std::cout << e.what() << std::endl;
-    // }
+    try {
+        double result = ftr.get();
+        std::cout << "Result = " << result << std::endl;
+    } catch (std::runtime_error e) {
+        std::cout << e.what() << std::endl;
+    }
 
     // thread barrier
     t.join();
