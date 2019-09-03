@@ -14,6 +14,22 @@ nothing has changed - we are still calling get() on the future in the try-block 
 unaltered in the catch-block. Also, we do not need to call join() any more. With async, 
 the thread destructor will be called automatically - which reduces the risk of a concurrency bug.
 
+std::thread and std::async is that with the latter, the system decides wether the associated function 
+should be run asynchronously or synchronously. By adjusting the launch parameters of std::async 
+manually, we can directly influence wether the associated thread function will be executed 
+synchronously or asynchronously.
+
+If we were to use the launch option "async" instead of "deferred", we would enforce an asynchronous 
+execution whereas the option "any" would leave it to the system to decide - which is the default
+
+
+Internally, std::async creates a promise, gets a future from it and runs a template function that 
+takes the promise, calls our function and then either sets the value or the exception of that 
+promise - depending on function behavior. The code used internally by std::async is more or less 
+identical to the code we used in the previous example.
+
+Also, std::async makes it possible to control the amount of concurrency by passing an optional 
+launch parameter, which enforces either synchronous or asynchronous behavior. 
 */
 
 #include <iostream>
@@ -21,6 +37,8 @@ the thread destructor will be called automatically - which reduces the risk of a
 #include <future>
 
 double divideByNumber(double num, double denom) {
+
+    std::cout << "Worker thread id = "<< std::this_thread::get_id() << std::endl;
 
     std::this_thread::sleep_for(std::chrono::milliseconds(500)); // simulate work
 
@@ -33,10 +51,15 @@ double divideByNumber(double num, double denom) {
 
 int main() {
 
+    // print system id of main thread
+    std::cout << "Main thread id = " << std::this_thread::get_id() << std::endl;
+
     // use asyn
     double num = 42.0, denom = 0.0;
     // divideByNumber(num, denom);
-    std::future<double> ftr = std::async(divideByNumber, num, denom);
+    // std::future<double> ftr = std::async(divideByNumber, num, denom);
+    std::future<double> ftr = std::async(std::launch::deferred, divideByNumber, num, denom);
+    // std::future<double> ftr = std::async(std::launch::async, divideByNumber, num, denom);
 
     // retrieve result within try-cathc-block
     // ftr.wait();
