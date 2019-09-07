@@ -1,4 +1,4 @@
-// RUN: g++ -std=c++17 -Wall -Wextra -Wpedantic -Wunused threads_mutex_1.cpp -pthread && ./a.out
+// RUN: g++ -std=c++17 -Wall -Wextra -Wpedantic -Wunused thread_mutex_1.cpp -pthread && ./a.out
 
 /*
 Assuming we have a piece of memory (e.g. a shared variable) that we want to protect from 
@@ -42,8 +42,8 @@ public:
     // typical behavious method
     void pushBack (Vehicle &&v) {
 
-        for (int i=0; i<3; ++i) {
-            if(_mtx.try_lock_for(std::chrono::milliseconds(10))) {
+        for (size_t i=0; i<3; ++i) {
+            if(_mtx.try_lock_for(std::chrono::milliseconds(1000))) {
                 _vehicles.emplace_back(std::move(v)); // data race would cause an exception
                 _mtx.unlock();
                 break;
@@ -58,6 +58,8 @@ public:
 private:
     std::vector<Vehicle> _vehicles; // list of all vehicles waiting to enter this intersection
     std::timed_mutex _mtx;
+    // std::recursive_mutex
+    // std::recursive_timed_mutex
 };
 
 int main() {
