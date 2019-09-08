@@ -18,8 +18,8 @@ std::mutex mutex1, mutex2;
 void ThreadA() {
     // Ensure that locks are always exeuted in the same order.
     std::lock(mutex1, mutex2);
-    std::lock_guard<std::mutex> lock2(mutex2, std::adopt_lock);
     std::lock_guard<std::mutex> lock1(mutex1, std::adopt_lock);
+    std::lock_guard<std::mutex> lock2(mutex2, std::adopt_lock);
     std::cout << "Thread A"<< std::endl;
 }
 
@@ -28,6 +28,7 @@ void ThreadB() {
     std::lock_guard<std::mutex> lock1(mutex1, std::adopt_lock);
     std::lock_guard<std::mutex> lock2(mutex2, std::adopt_lock);
     std::cout << "Thread B"<< std::endl;
+    
 }
 
 void ExecuteThreads() {
