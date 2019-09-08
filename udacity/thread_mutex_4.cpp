@@ -25,7 +25,7 @@ text is printed to the console
 std::mutex mutex1, mutex2;
 
 void ThreadA() {
-    // Creates beadloc problem
+    // Creates deadloc problem
     mutex1.lock();
     std::cout << "Thread A"<< std::endl;
     mutex2.lock();
@@ -35,7 +35,7 @@ void ThreadA() {
 }
 
 void ThreadB() {
-    // Creates beadloc problem
+    // Creates deadloc problem
     //std::this_thread::sleep_for(std::chrono::milliseconds(10));
     mutex1.lock();
     std::cout << "Thread B"<< std::endl;
