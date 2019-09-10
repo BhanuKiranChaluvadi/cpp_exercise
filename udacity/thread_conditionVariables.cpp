@@ -19,6 +19,27 @@ be used in conjunction with another shared state that can be checked independent
 Notifying a condition variable in this case would then only mean to proceed and check this other 
 shared state.
 
+
+In the method popBack, we need to create the lock first - it can not be a lock_guard any more as 
+we need to pass it to the condition variable - to its method wait. Thus it must be a unique_lock.
+
+Now we can enter the wait state while at same time releasing the lock. It is only inside wait, 
+that the mutex is temporarily unlocked - which is a very important point to remember: We are 
+holding the lock before AND after our call to wait - which means that we are free to access 
+whatever data is protected by the mutex. In our example, this will be dataIsAvailable().
+
+even after a spurious wake-up, we are now checking wether data really is available. 
+If so, we would be issuing the call to wait on the condition variable.
+
+If the vector is empty, wait is called. When the thread wakes up again, the condition 
+is immediately re-checked and - in case it has not been a spurious wake-up we can continue 
+with our job and retrieve the vector.
+
+## equivalent code:
+while (_vehicles.empty()) {
+    _cond.wait(uLock); 
+}
+
 */
 
 #include <iostream>
