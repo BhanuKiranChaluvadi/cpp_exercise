@@ -41,9 +41,11 @@ int main() {
 
     auto poly1 = std::make_unique<Rectangle>(2, 4);
     std::unique_ptr<Polygon> poly2 = std::make_unique<Triangle>(2, 4);
+    std::unique_ptr<Polygon> poly3(new Triangle(2, 4));
 
     poly1->printArea();
     poly2->printArea();
+    poly3->printArea();
 
     return 0;
 }
