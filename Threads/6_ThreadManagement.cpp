@@ -2,6 +2,11 @@
 ** RUN: g++ -std=c++17 -pthread 6_ThreadManagement.cpp && ./a.out
 
 1. Passing a parameter by reference should use : std::move
+2. How many thread should i create a tough problem : 
+        Ideally as many threads as  possible
+        We don't want to run more threads than hardware can support -- over subscription
+        More threads than available cpu cores It creates a lot of contact switching 
+        And too many of contact switcing will degrade my performance.
 
 */
 

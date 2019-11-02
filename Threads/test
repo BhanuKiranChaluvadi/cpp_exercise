@@ -1,0 +1,15 @@
+// code 
+
+while (true) 
+{
+    if ((numbytes = recvfrom(sockfd, buf, MAXBUFLEN-1 , 0,
+        (struct sockaddr *)&cient_addr, &client_addr_len)) == -1)
+    {
+        perror("recvfrom");
+        exit(1);
+    }
+
+    // Do something with buffer 
+}
+
+// code 
